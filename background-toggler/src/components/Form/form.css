@@ -1,0 +1,36 @@
+form {
+    max-width: 550px;
+    margin: 0 auto;
+    width: 80%;
+}
+.group {
+    margin-top: 30px;
+}
+.group > * {
+    align-items: center;
+    display: block;
+}
+.group input {
+    width: 100%;
+    padding: 15px 0 15px 15px;
+    border: 2px solid #eaeaea;
+    border-radius: 5px;
+    font-family: "Poppins";
+}
+.group:last-child {
+  display: flex;
+  justify-content: center;
+}
+.group button {
+  padding: 15px 20px 15px 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  font-family: "Poppins";
+  color: #161616;
+  border: 2px solid #161616;
+  outline: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
