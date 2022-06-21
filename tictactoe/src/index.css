@@ -8,6 +8,32 @@ ul {
     padding-left: 30px;
 }
 
+li {
+    padding-top: 5px;
+}
+
+ol button,
+.btnHist {
+    outline: none;
+    border: none;
+    text-align: left;
+    width: 150px;
+    font-family: "Century Gothic";
+}
+
+.boldMove {
+    font-weight: bold;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+ol button:hover,
+.btnHist:hover {
+    text-decoration: underline;
+}
+
 .board-row:after {
     clear: both;
     content: "";
@@ -46,6 +72,10 @@ ul {
     flex-direction: row;
 }
 
-.game-info {
-    margin-left: 20px;
+.game-board {
+    margin-right: 30px;
+}
+
+.square.winBG {
+    background-color: rgb(29, 209, 77);
 }
