@@ -104,7 +104,7 @@ export default function Countries(props) {
         'IS': 'Iceland',
         'IN': 'India',
         'ID': 'Indonesia',
-        'IR': 'Iran, Islamic Republic Of',
+        'IR': 'Iran',
         'IQ': 'Iraq',
         'IE': 'Ireland',
         'IM': 'Isle Of Man',
