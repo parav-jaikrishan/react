@@ -1,5 +1,9 @@
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   width: 100vw;
   height: 100vh;
+  background:  linear-gradient(0deg, rgba(0, 0, 0, 20%), rgba(0, 0, 0, 20%)), url("../public/images/bg.jfif");
+  background-size: cover;
 }
