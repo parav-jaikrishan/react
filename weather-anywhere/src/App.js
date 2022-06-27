@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from './components/Header/header';
 import Form from './components/Form/form';
 import Weather from './components/Weather/weather';
+import Loader from './components/Loader/loader';
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -22,6 +23,7 @@ function App() {
     date: "",
     error: false,
     loaded: false,
+    submitted: false,
     weatherData: null
   });
   const changeInputValue = e => {
@@ -32,7 +34,8 @@ function App() {
     setData({
       ...data,
       error: false,
-      loaded: false
+      loaded: false,
+      submitted: true
     })
     const appid = `2b74898c3562a04166e8c17b247031c2&units=${data.units}`;
     const baseLink = "https://api.openweathermap.org/data/2.5";
@@ -87,6 +90,7 @@ function App() {
       <div className="data-container">
         {!data.error && data.loaded && <Weather data = {data} fahrToCels={fahrToCels} celsToFahr={celsToFahr}/>}
       </div>
+      {!data.loaded && !data.error && data.submitted && <Loader/>}
     </div>
   );
 }
