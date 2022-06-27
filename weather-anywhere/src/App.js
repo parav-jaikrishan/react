@@ -4,6 +4,7 @@ import Header from './components/Header/header';
 import Form from './components/Form/form';
 import Weather from './components/Weather/weather';
 import Loader from './components/Loader/loader';
+import Forecast from './components/Forecast/forecast';
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -21,6 +22,7 @@ function App() {
     icon: "",
     location: "",
     date: "",
+    forecast: [],
     error: false,
     loaded: false,
     submitted: false,
@@ -44,14 +46,13 @@ function App() {
       .then(result => {
         if(result.cod === "404") {
           setData({
-            ...data,
             loaded: true,
             error: true
           });
         } else {
-          setData({
-            ...data,
+          let weatherArr = {
             country: result.sys.country,
+            units: data.units,
             temp: result.main.temp,
             feels_like: result.main.feels_like,
             visibility: result.visibility,
@@ -63,13 +64,34 @@ function App() {
             icon: result.weather[0].icon,
             location: result.name,
             date: result.dt,
-            loaded: true,
+            submitted: true,
             error: false
-          });
+          };
+          fetch(`${baseLink}/onecall?lat=${result.coord.lat}&lon=${result.coord.lon}&exclude=current,minutely,hourly&appid=${appid}`)
+            .then(res => res.json())
+            .then(result => {
+              if(result.cod === "404") {
+                setData({
+                  loaded: true,
+                  error: true
+                })
+              } else {
+                setData({
+                  ...weatherArr,
+                  forecast: result.daily.splice(1),
+                  loaded: true,
+                  error: false
+                })
+              }
+            }).catch(() => {
+              setData({
+                loaded: true,
+                error: true
+              })
+            })
         }
       }).catch(() => {
           setData({
-            ...data,
             loaded: true,
             error: true,
           })
@@ -89,6 +111,7 @@ function App() {
       <Form onSubmission={handleSubmit} inputValue={inputValue} changeInputValue = {changeInputValue}/>
       <div className="data-container">
         {!data.error && data.loaded && <Weather data = {data} fahrToCels={fahrToCels} celsToFahr={celsToFahr}/>}
+        {!data.error && data.loaded && <Forecast data={data.forecast}/>}
       </div>
       {!data.loaded && !data.error && data.submitted && <Loader/>}
     </div>
