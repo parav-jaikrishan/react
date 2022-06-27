@@ -320,6 +320,7 @@ export default function Weather(props) {
                     <button className={"toFahrenheit" + (units === "imperial" ? " active" : "")} onClick={props.celsToFahr}>F</button>
                 </div>
             </div>
+            <h3 className="description">{data.desc}</h3>
             <div className="info">
                 <div className="row">
                     <span>Feels Like {Math.round(data.feels_like)}&deg;</span>

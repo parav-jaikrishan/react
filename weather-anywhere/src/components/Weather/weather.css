@@ -11,19 +11,19 @@
     justify-content: center;
 }
 .currentWeather .icon {
-    margin-top: 50px;
+    margin-top: 30px;
     height: 170px;
     padding: 0px;
 }
 .currentWeather .temperature {
     font-weight: 100;
     font-size: 120px;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
 .currentWeather .convertingButtons {
-    margin-top: 87px;
+    margin-top: 67px;
     margin-bottom: 0px;
 }
 .currentWeather .convertingButtons .toCelsius,
@@ -45,7 +45,7 @@
     margin-top: 0px;
 }
 .currentWeather .convertingButtons .toFahrenheit {
-    margin-top: 35px;
+    margin-top: 31px;
     padding-bottom: 0px;
 }
 .currentWeather .convertingButtons .toCelsius.active,
@@ -64,6 +64,11 @@
 .currentWeather .convertingButtons .toFahrenheit:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid white;
+}
+.description {
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 15px;
 }
 .info {
     display: block;
