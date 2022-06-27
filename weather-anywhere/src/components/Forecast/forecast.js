@@ -28,8 +28,8 @@ export default function Forecast(props) {
                         <h3>{getDay(forecast.dt).substring(0, 3)} {getDayOfMonth(forecast.dt)}</h3>
                         <img src={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt={`Icon showing ${getDay(forecast.dt)}'s weather`} />
                         <div className="temperature">
-                            <span className={"maxTemp" + (Math.round(forecast.temp.max) > 99 ? " short" : "")}>{Math.round(forecast.temp.max)}&deg;</span>
-                            <span className={"minTemp" + (Math.round(forecast.temp.max) > 99 ? " short" : "")}>{Math.round(forecast.temp.min)}&deg;</span>
+                            <span className="maxTemp">{Math.round(forecast.temp.max)}&deg;</span>
+                            <span className="minTemp">{Math.round(forecast.temp.min)}&deg;</span>
                         </div>
                     </div>
                 );
