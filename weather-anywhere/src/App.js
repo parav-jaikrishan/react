@@ -1,7 +1,8 @@
 import './App.css';
-import {useState} from "react";
+import { useState } from "react";
 import Header from './components/Header/header';
 import Form from './components/Form/form';
+import Weather from './components/Weather/weather';
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -20,14 +21,19 @@ function App() {
     location: "",
     date: "",
     error: false,
+    loaded: false,
     weatherData: null
   });
   const changeInputValue = e => {
     setInputValue(e.target.value);
   }
-
   const handleSubmit = e => {
     e.preventDefault();
+    setData({
+      ...data,
+      error: false,
+      loaded: false
+    })
     const appid = `2b74898c3562a04166e8c17b247031c2&units=${data.units}`;
     const baseLink = "https://api.openweathermap.org/data/2.5";
     fetch(`${baseLink}/weather?q=${inputValue}&appid=${appid}`)
@@ -36,6 +42,7 @@ function App() {
         if(result.cod === "404") {
           setData({
             ...data,
+            loaded: true,
             error: true
           });
         } else {
@@ -53,15 +60,33 @@ function App() {
             icon: result.weather[0].icon,
             location: result.name,
             date: result.dt,
-            error: false,
+            loaded: true,
+            error: false
           });
         }
-      })
+      }).catch(() => {
+          setData({
+            ...data,
+            loaded: true,
+            error: true,
+          })
+        })
+  }
+  const fahrToCels = e => {
+    data.units = "metric";
+    handleSubmit(e);
+  }
+  const celsToFahr = e => {
+    data.units = "imperial";
+    handleSubmit(e);
   }
   return (
     <div className="App">
       <Header/>
       <Form onSubmission={handleSubmit} inputValue={inputValue} changeInputValue = {changeInputValue}/>
+      <div className="data-container">
+        {!data.error && data.loaded && <Weather data = {data} fahrToCels={fahrToCels} celsToFahr={celsToFahr}/>}
+      </div>
     </div>
   );
 }
