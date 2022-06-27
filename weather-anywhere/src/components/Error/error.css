@@ -1,0 +1,20 @@
+.error {
+    background: none;
+    margin-top: 80px;
+}
+.error * {
+    text-align: center;
+}
+.error h1,
+.error p {
+    font-family: "Poppins";
+    color: #fefefe;
+}
+.error h1 {
+    margin-bottom: 20px;
+}
+.error p {
+    display: block;
+    margin: auto;
+    width: 500px;
+}

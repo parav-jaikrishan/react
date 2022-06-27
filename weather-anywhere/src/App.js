@@ -1,12 +1,13 @@
 import './App.css';
 import { useState } from "react";
 import Header from './components/Header/header';
+import Error from './components/Error/error';
 import Form from './components/Form/form';
 import Weather from './components/Weather/weather';
 import Loader from './components/Loader/loader';
 import Forecast from './components/Forecast/forecast';
 
-function App() {
+export default function App() {
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState({
     country: "",
@@ -46,6 +47,7 @@ function App() {
       .then(result => {
         if(result.cod === "404") {
           setData({
+            ...data,
             loaded: true,
             error: true
           });
@@ -72,6 +74,7 @@ function App() {
             .then(result => {
               if(result.cod === "404") {
                 setData({
+                  ...data,
                   loaded: true,
                   error: true
                 })
@@ -85,6 +88,7 @@ function App() {
               }
             }).catch(() => {
               setData({
+                ...data,
                 loaded: true,
                 error: true
               })
@@ -92,6 +96,7 @@ function App() {
         }
       }).catch(() => {
           setData({
+            ...data,
             loaded: true,
             error: true,
           })
@@ -112,10 +117,9 @@ function App() {
       <div className="data-container">
         {!data.error && data.loaded && <Weather data = {data} fahrToCels={fahrToCels} celsToFahr={celsToFahr}/>}
         {!data.error && data.loaded && <Forecast data={data.forecast}/>}
+        {data.error && data.loaded && <Error />}
       </div>
-      {!data.loaded && !data.error && data.submitted && <Loader/>}
+      {!data.loaded && !data.error && data.submitted && <Loader />}
     </div>
   );
 }
-
-export default App;
